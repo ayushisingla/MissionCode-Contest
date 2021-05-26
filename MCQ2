@@ -1,0 +1,94 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	    try{
+		Scanner sc = new Scanner(System.in);
+		int num = sc.nextInt();
+		int[] arr = new int[num];
+		for(int i=0;i<num;i++)
+		{
+		    arr[i] = sc.nextInt();
+		}
+		int[] result = new int[num];
+		for(int i=0;i<num;i++)
+		{
+		    result[i]=1;
+		}
+		int asc =0;
+		int desc =0;
+		
+		//main calculations
+		for(int i=1;i<num;i++)
+		{
+		    int prev=arr[i-1];
+		    int element=arr[i];
+		    
+		    //Case 1: prev>element
+		    if(prev>element)
+		    {
+		        desc++;    
+		    }
+		    else{
+		        desc = 0;
+		    }
+		    
+		    if(desc>0)
+		    {
+		        int index = i;
+		        for(int j=1;j<=desc;j++)
+		        {
+		            if(result[index-1]>j)
+		            {
+		                continue;
+		            }
+		            else{
+		                result[index-1]=j+1;
+		                
+		            }
+		            index--;
+		        }
+		    }
+		    
+		    //case 2: prev<element
+		    if(prev<element)
+		    {
+		        result[i]=result[i-1]+1;
+		    }
+		    
+		    //case 3: prev == element
+		    if(prev==element)
+		    {
+		        if(result[i-1]>1)
+		        {
+		            result[i]= 1;
+		        }
+		        if(result[i-1]==1)
+		        {
+		            result[i] = result[i-1]+1;
+		        }
+		    }
+		    
+		}
+		
+		//printing sum of result candies Array
+		int sum=0;
+		for(int i=0;i<num;i++)
+		{
+	        sum += result[i];	    
+		}
+		System.out.println(sum);
+	    }
+	    catch(Exception e)
+	    {
+	        return;
+	    }
+	}
+}
