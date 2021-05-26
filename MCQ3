@@ -1,0 +1,111 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+ 
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		try{
+		    Scanner sc = new Scanner(System.in);
+		    int n = sc.nextInt();
+		    int green = sc.nextInt();
+		    int[] arr = new int[n];
+		    List<Integer> red = new ArrayList<>();
+		    for(int i=0;i<n;i++)
+		    {
+		        arr[i] = sc.nextInt();
+		    }
+		    
+		    //calculations
+		    boolean isPossible = true;
+		    for(int i=1;i<n;i++)
+		    {
+		            int next = arr[i];
+		            int present = arr[i-1];
+		        
+		            //case 1: present<next
+		            if(present<next)
+		            {
+		              int sum = next-present;
+		              //check for red
+		              if(red.size()==0)
+		              {
+		                  //check for green
+		                  if(sum<=green)
+		                  {
+		                      green -= sum;
+		                      sum = 0;
+		                  }
+		                  else
+		                  {
+		                      isPossible = false;
+		                      break;
+		                  }
+		              }
+		              else{
+		                  int size = red.size();
+		                  int lastRed = red.get(size-1);
+		                  if(lastRed<=sum)
+		                  {
+		                      sum -= lastRed;
+		                      red.remove(size-1);
+		                      if(sum>0)
+		                      {
+		                        if(sum<=green)
+		                        {
+		                            green -= sum;
+		                            sum=0;
+		                        }
+		                       else
+		                        {
+		                            isPossible = false;
+		                            break;
+		                        }  
+		                       }
+		                  }
+		                  else{
+		                      //update last Red block
+		                      lastRed -= sum;
+		                      sum=0;
+		                      red.set(size-1,lastRed);
+		                  }
+		                  
+		                  
+		              }
+		            }
+		            
+		            //case 2: present>next
+		            else if(present>next)
+		            {
+		                int sum = present-next;
+		                red.add(sum);
+		            }
+		            
+		            //case 3: present==next ie no need to do anything
+		            else
+		            {
+		            continue;
+		            }
+		    }
+		    
+		    //output
+		    if(isPossible)
+		    {
+		        System.out.println("YES");
+		    }
+		    else{
+		        System.out.println("NO");
+		    }
+		    
+		}
+		catch(Exception e)
+		{
+		    return;
+		}
+	}
+}
