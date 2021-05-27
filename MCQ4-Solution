@@ -1,0 +1,67 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		try{
+		    Scanner sc = new Scanner(System.in);
+		    int n = sc.nextInt();
+		    int m = sc.nextInt();
+		    
+		    //candies array
+		    int[] cand = new int[n*m];
+		    for(int i=0;i<n*m;i++)
+		    {
+		        cand[i] = sc.nextInt();
+		    }
+		    
+		    //choice for a person array
+		    int[] choice = new int[n];
+		    for(int i=0;i<n;i++)
+		    {
+		        choice[i] = sc.nextInt();
+		    }
+		    
+		    //happiness calculate meter array
+		    int[] happ = new int[m];
+		    for(int i=0;i<m;i++)
+		    {
+		        happ[i] = sc.nextInt();
+		    }
+		    
+		    //Main calculations
+		    int result=0;
+		    for(int i=0;i<n;i++)
+		    {
+		        int count =0;
+		        for(int j=0;j<n*m;j++)
+		        {
+		            if(choice[i]==cand[j] && count<m)
+		            {
+		                cand[j]=0;
+		                count++;
+		            }
+		        }
+		        
+		        //calculate happiness
+		        if(count>0)
+		        {
+		          result += happ[count-1];  
+		        }
+		        
+		    }
+		    System.out.println(result);
+		    
+		}
+		catch(Exception e)
+		{
+		   return;
+		}
+	}
+}
